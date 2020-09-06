@@ -1,5 +1,7 @@
 package com.twc.javaBasic;
 
+import java.util.Objects;
+
 @SuppressWarnings("unused")
 public class PersonForEquals {
     private final String name;
@@ -44,7 +46,13 @@ public class PersonForEquals {
         //  (5) For any non-null reference x, x.equals(null) should return false.
         //
         // <--start
-        throw new RuntimeException("Not implemented");
+
+        // Assumption: We treat people with the same name and year of birth as the same person
+        if (obj == null) return false;
+        if (obj == this) return true;
+        if (getClass() != obj.getClass()) return false;
+        PersonForEquals other = (PersonForEquals) obj;
+        return name.equals(other.getName()) && yearOfBirth == other.getYearOfBirth();
         // --end-->
     }
 
@@ -59,7 +67,7 @@ public class PersonForEquals {
         //
         //
         // <--start
-        throw new RuntimeException("Not implemented");
+        return Objects.hash(name, yearOfBirth);
         // --end-->
     }
 }
